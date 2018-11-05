@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--css-->
+    <link rel="stylesheet" type="text/css" href="promoStyle.css">
+
+    <!--javascript-->
+    <!-- 
+    PRODUCTION:
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7FFZUr4sG42PUYd7hPStRFM2YrxqF8SM&callback=initMap">
+    DEVELOPMENT:
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDG-px9WS8TMAIhilegAlu6-9Bj6RB5-Ds&callback=initMap">              
+    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7FFZUr4sG42PUYd7hPStRFM2YrxqF8SM&callback=initMap"
+    async defer></script>
+    <script type="text/javascript" src="promoScript.js"></script>
+
+    <title>Promotion zone</title>      
+
+</head>
+<body>
+
+    <h2>PROMOTION ZONE DETECTIVE</h2>
+    <h3>Enter the pick-up address and the map will tell you if its within the promotion zone for 
+        the first ride.</h3>
+
+    <p id="output"></p>    
+    <hr>
+    
+    <div id="bodyWrapper">
+        <div id="map"></div>
+        <div id="searchAddDiv">
+            <h4>place pick-up address here</h4>
+            <input type="text" name="addressSearch" id="searchTxt">
+            <button type="button" id="findOut" onclick="findAddsLocation()">Find out</button>
+            <p id="result">Here it shall be displyed</p> 
+        </div>
+    </div>
+
+</body>
+</html>
