@@ -1,23 +1,27 @@
 var address = "";
-
+var promotionZone;
+var geocoder;
+var map;
+var input;
+var button;
 //var address = document.getElementById("searchTxt").value;    
 //document.getElementById("output").innerHTML = "Hello " + prompt("E-mail");
 //alert("Hello " + name);    
-function findAddsLocation(){
-    if (document.getElementById("searchTxt").value != ""){
-        alert("There is something");
-        address = document.getElementById("searchTxt").value;
-    }else{
-        alert("Field cannot be empty");
-    }
-}
+
 // This example creates a simple polygon representing the Bermuda Triangle.
 function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: {lat: 40.723709, lng: -74.0152319},
     mapTypeId: 'terrain'
     });
+
+    //Initializing geocoder
+    geocoder = new google.maps.Geocoder();
+
+    //Initializing elements
+    input = document.getElementById("address");
+    button = document.getElementById("findOut");
 
     // Define the LatLng coordinates for the polygon's path (promo zone limits).
 
@@ -81,7 +85,7 @@ function initMap() {
     ];    
 
     // Construct the polygon for promotion zone.
-    var promotionZone = new google.maps.Polygon({
+    promotionZone = new google.maps.Polygon({
     paths: promoZoneCoords,
     strokeColor: '#3F45F5',
     strokeOpacity: 0.8,
@@ -90,4 +94,89 @@ function initMap() {
     fillOpacity: 0.35
     });
     promotionZone.setMap(map);
+
+    enterKeyListener();
 }
+
+function enterKeyListener(){
+    input.addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            button.click();
+        }
+    });
+}
+
+function findAddsLocation(){
+    if (input.value != ""){
+        //there is some value
+            var address = input.value;
+            geocoder.geocode( {'address': address}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    console.log("ran till here");
+                    map.setCenter(results[0].geometry.location);
+
+                    /*
+                    if(marker)
+                        marker.setMap(null);
+                    */        
+
+                    var resultColor =
+                    google.maps.geometry.poly.containsLocation(results[0].geometry.location, promotionZone) ?
+                    'green' :
+                    'red';
+                
+                    var resultPath =
+                        google.maps.geometry.poly.containsLocation(results[0].geometry.location, promotionZone) ?
+                        // A triangle.
+                        "m 0 -1 l 1 2 -2 0 z" :
+                        google.maps.SymbolPath.CIRCLE;
+
+                    new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        draggable: true,
+                        icon: {
+                            path: resultPath,
+                            fillColor: resultColor,
+                            fillOpacity: .2,
+                            strokeColor: 'white',
+                            strokeWeight: .5,
+                            scale: 10
+                        }
+                    });
+                }
+            })
+    }else{
+        //there is nothing
+        alert("Field cannot be empty");
+    }
+}
+
+/*
+function markerLocator() {
+    var resultColor =
+        google.maps.geometry.poly.containsLocation(e.latLng, promotionZone) ?
+        'blue' :
+        'red';
+
+    var resultPath =
+        google.maps.geometry.poly.containsLocation(e.latLng, promotionZone) ?
+        // A triangle.
+        "m 0 -1 l 1 2 -2 0 z" :
+        google.maps.SymbolPath.CIRCLE;
+
+    new google.maps.Marker({
+        position: e.latLng,
+        map: map,
+        icon: {
+            path: resultPath,
+            fillColor: resultColor,
+            fillOpacity: .2,
+            strokeColor: 'white',
+            strokeWeight: .5,
+            scale: 10
+        }
+    })
+}
+*/
