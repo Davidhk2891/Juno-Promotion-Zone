@@ -4,6 +4,8 @@ var geocoder;
 var map;
 var input;
 var button;
+var result;
+var loader;
 //var address = document.getElementById("searchTxt").value;    
 //document.getElementById("output").innerHTML = "Hello " + prompt("E-mail");
 //alert("Hello " + name);    
@@ -22,6 +24,13 @@ function initMap() {
     //Initializing elements
     input = document.getElementById("address");
     button = document.getElementById("findOut");
+    result = document.getElementById("result");
+    loader = document.getElementById("loader");
+
+
+    //Hidden elements at first
+    loader.style.visibility = "hidden";
+    result.style.visibility = "visible";
 
     // Define the LatLng coordinates for the polygon's path (promo zone limits).
 
@@ -110,6 +119,8 @@ function enterKeyListener(){
 function findAddsLocation(){
     if (input.value != ""){
         //there is some value
+        loader.style.visibility = "visible";
+        result.style.visibility = "hidden";
             var address = input.value;
             geocoder.geocode( {'address': address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -121,16 +132,28 @@ function findAddsLocation(){
                         marker.setMap(null);
                     */        
 
+                    /*
                     var resultColor =
                     google.maps.geometry.poly.containsLocation(results[0].geometry.location, promotionZone) ?
                     'green' :
                     'red';
+                    */
+
+                    //This way I have more control over what happends when address is within or not promo zone
+                    var resultColor;
+                    if (google.maps.geometry.poly.containsLocation(results[0].geometry.location, promotionZone)){
+                        resultColor = 'green';
+                        changeOutputText("Address inside promotion zone :)");
+                        loader.style.visibility = "hidden";
+                        result.style.visibility = "visible";
+                    }else{
+                        resultColor = 'red';
+                        changeOutputText("Address NOT inside promotion zone :(");
+                        loader.style.visibility = "hidden";
+                        result.style.visibility = "visible";
+                    }
                 
-                    var resultPath =
-                        google.maps.geometry.poly.containsLocation(results[0].geometry.location, promotionZone) ?
-                        // A triangle.
-                        "m 0 -1 l 1 2 -2 0 z" :
-                        google.maps.SymbolPath.CIRCLE;
+                    var resultPath = google.maps.SymbolPath.CIRCLE;
 
                     new google.maps.Marker({
                         map: map,
@@ -151,6 +174,10 @@ function findAddsLocation(){
         //there is nothing
         alert("Field cannot be empty");
     }
+}
+
+function changeOutputText(txtChanged){
+    result.innerHTML = txtChanged;
 }
 
 /*

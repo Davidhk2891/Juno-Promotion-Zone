@@ -5,39 +5,65 @@
 }
 
 #searchAddDiv {
-    margin-left: 140px;
-    float: right;
+    margin-left: 120px;
     text-align: center;
-    vertical-align:top;
+}
+
+#form {
+    text-align: center;
 }
 
 #address {
-    width:300px;
-    margin:0 auto;
-    margin-top: -20px;
+    width:400px;
     border:3px solid #3F45F5;
+    /* margin-top: -20px;
+    display: inline-block;
     height:20px;
-    padding: 5px;
+    padding: 5px;  */
 }
 
 #findOut {
+    display: inline-block;
     background-color: #B3ACE8;
     border:1px solid #3F45F5;
     color: white;
     padding: 9px 22px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: 7px 2px;
+    margin: 14px 0px;
     cursor: pointer;
-
 }
 
 #result {
-    margin: 80px 0px 0px 0px;
+    margin: -10px 0px 0px 0px;
     size: 20px;
 }
+
+/*LOADER*/
+#loader{
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3F45F5;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    display: inline-block;
+    margin: 45px 0px 0px 0px;
+    -webkit-animation: spin 0.5s linear infinite; /* Safari */
+    animation: spin 0.5s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+/*///////*/
 
 /* Always set the map height explicitly to define the size of the div
             * element that contains the map. */

@@ -19,6 +19,14 @@
     async defer></script>
     <script type="text/javascript" src="promoScript.js"></script>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    <!-- Latest compiled JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
     <title>Promotion zone</title>      
 
 </head>
@@ -32,13 +40,32 @@
     <hr>
     
     <div id="bodyWrapper">
+
         <div id="map"></div>    
+
         <div id="searchAddDiv">
-            <h4>place pick-up address here</h4>
-            <input type="text" name="addressSearch" id="address">
-            <button type="button" id="findOut" onclick="findAddsLocation()">Find out</button>
-            <p id="result">Here it shall be displyed</p> 
+
+            <form>
+                <div class="form-group"> <!-- place pick-up address here field !-->
+                    <label for="addressInput" class="control-label">place pick-up address here</label>
+                    <input type="text" class="form-control" id="address" name="address_name" placeholder="address">
+                </div>
+                
+                <div class="form-group"> <!-- Find out button !-->
+                    <button type="button" class="btn btn-primary" id="findOut" onClick="findAddsLocation()">Find out</button>
+                </div>	
+            </form>
+
+            <!--OLD-->
+            <!-- <h4>place pick-up address here</h4>
+            <form id="form">
+                <input type="text" name="addressSearch" id="address">
+                <button type="button" id="findOut" onclick="findAddsLocation()">Find out</button>
+            </form> -->
+            <div id="loader"></div>
+            <p id="result">...</p> 
         </div>
+
     </div>
 
 </body>
