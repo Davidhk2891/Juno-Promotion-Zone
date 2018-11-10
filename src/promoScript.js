@@ -111,7 +111,8 @@ function enterKeyListener(){
     input.addEventListener("keyup", function(event) {
         event.preventDefault();
         if (event.keyCode === 13) {
-            button.click();
+            //button.click();
+            findAddsLocation();
         }
     });
 }
