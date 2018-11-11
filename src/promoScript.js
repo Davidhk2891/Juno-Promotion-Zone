@@ -104,18 +104,19 @@ function initMap() {
     });
     promotionZone.setMap(map);
 
-    enterKeyListener();
+    // enterKeyListener();
 }
 
-function enterKeyListener(){
-    input.addEventListener("keyup", function(event) {
-        event.preventDefault();
-        if (event.keyCode === 13) {
-            //button.click();
-            findAddsLocation();
-        }
-    });
-}
+// function enterKeyListener(){
+//     input.addEventListener("keyup", function(event) {
+//         event.preventDefault();
+//         if (event.keyCode === 13) {
+//             console.log("ran from enter key");
+//             alert("ran here");
+//             //button.click();
+//         }
+//     });
+// }
 
 function findAddsLocation(){
     if (input.value != ""){
