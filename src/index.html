@@ -31,13 +31,15 @@
 </head>
 <body>
 
-    <h2>PROMOTION ZONE DETECTIVE</h2>
-    <h3>Enter the pick-up address and the map will tell you if its within the promotion zone for 
-        the first ride.</h3>
+    <div id="introWrapper">
 
-    <p id="output"></p>    <!--ENTER KEY FUNCTIONALITY DOES NOT WORK-->
-    <hr>
-    
+        <h2>PROMOTION ZONE DETECTIVE</h2>
+        
+        <h3>Enter the pick-up address and the map will tell you if its within the promotion zone for 
+            the first ride.</h3>  
+
+    </div>
+
     <div id="bodyWrapper">
 
         <div id="map"></div>    
@@ -61,10 +63,13 @@
                 <input type="text" name="addressSearch" id="address">
                 <button type="button" id="findOut" onclick="findAddsLocation()">Find out</button>
             </form> -->
-            <div id="loader"></div>
-            <p id="result">...</p> 
-        </div>
 
+            <div id="loader"></div>
+
+            <p id="result">...</p> 
+
+        </div>
+    
     </div>
 
     <script>
