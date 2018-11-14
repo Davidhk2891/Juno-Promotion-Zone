@@ -12,6 +12,7 @@ var loader;
 
 // This example creates a simple polygon representing the Bermuda Triangle.
 function initMap() {
+    console.log("init ran");
     map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
     center: {lat: 40.723709, lng: -74.0152319},
@@ -170,6 +171,10 @@ function findAddsLocation(){
                             scale: 10
                         }
                     });
+                }else{
+                    changeOutputText("Not an address :(");
+                        loader.style.visibility = "hidden";
+                        result.style.visibility = "visible";
                 }
             })
     }else{
